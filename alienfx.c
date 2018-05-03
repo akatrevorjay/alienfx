@@ -157,6 +157,37 @@ AlienFxLights_t LightsAlienware15r3[] = {
 unsigned int LightsAlienware15r3Count = (sizeof LightsAlienware15r3
                                              / sizeof *LightsAlienware15r3);
 
+// 17r4 lighting.  Left/right from the alien head's persp,0 ective, facing you
+AlienFxLights_t Lights17r4[] = {
+	/* { 0x0002, "keyboard-right"	,0 }, */
+	{ 0x00002, "keyboard-mid-right"       ,0 },
+	/* { 0x0004, "keyboard-middle"	,0 }, */
+	{ 0x00004, "keyboard-mid-left"        ,0 },
+	/* { 0x0008, "keyboard-left"	,0 }, */
+	{ 0x00008, "keyboard-far-left"        ,0 },
+	/* { 0x0001, "keyboard-numpad"     ,0 }, */
+	{ 0x00001, "keyboard-far-right"       ,0 },	// numpad
+	/* { 0x00100, "power-button"             ,0 },	// nothing */
+	{ 0x00020, "head"                     ,0 },	// on the lid
+	{ 0x00040, "name"                     ,0 },
+	/* { 0x0080, "head"                ,0 }, // alien's */
+	{ 0x00800, "bottom-right-burner"      ,0 },
+	{ 0x00400, "bottom-left-burner"       ,0 },
+	{ 0x02000, "top-right-burner"         ,0 },
+	{ 0x01000, "top-left-burner"          ,0 },
+	/* { 0x0200, "touchpad"                  ,0 }, */
+	{ 0x00080, "touchpad"                 ,0 },
+	/* { 0x04000, "alienfx-left"             ,0 },	// left alienfx */
+	{ 0x04000, "special"                  ,0 },	// left alienfx
+
+	/* { 0x1c00, "sides-left-both-and-right-lower"           ,1 }, // what */
+
+	/* { 0x7fff, "all"                 ,1 }, */
+	{ 0x0ffff, "all"                      ,1 },
+};
+unsigned int Lights17r4Count = (sizeof Lights17r4
+								  / sizeof *Lights17r4);
+
 // Area51 lighting.
 AlienFxLights_t LightsArea51[] = {
 	{ 0x00001, "touchpad"   ,0 },
@@ -189,27 +220,6 @@ unsigned int LightsAuroraCount = (sizeof LightsAurora
 								  / sizeof *LightsAurora);
 
 
-// 17r4 lighting.  Left/right from the alien head's persp,0 ective, facing you
-AlienFxLights_t Lights17r4[] = {
-	{ 0x0001, "keyboard-numpad"     ,0 },
-	{ 0x0002, "keyboard-right"	,0 },
-	{ 0x0004, "keyboard-middle"	,0 },
-	{ 0x0008, "keyboard-left"	,0 },
-	/* { 0x0010, "power-button-2"      ,0 }, */
-	/* { 0x0020, "speaker-right"       ,0 }, */
-	{ 0x0040, "logo"		,0 },
-	{ 0x0080, "head"                ,0 }, // alien's
-	/* { 0x0100, "name"                ,0 }, */
-	/* { 0x0200, "touchpad"            ,0 }, */
-	{ 0x1c00, "sides-left-both-and-right-lower"           ,0 }, // what
-	{ 0x2000, "side-right-upper"        ,0 },
-	{ 0x4000, "keyboard-macropad"   ,0 },
-	{ 0x7fff, "all"                 ,1 },
-};
-unsigned int Lights17r4Count = (sizeof Lights17r4
-								  / sizeof *Lights17r4);
-
-
 typedef struct _AlienFxType_t {
 	unsigned int idVendor;
 	unsigned int idProduct;
@@ -237,10 +247,10 @@ AlienFxType_t AlienFxTypes[] = {
 	  LightsAllPowerful, sizeof LightsAllPowerful / sizeof *LightsAllPowerful },
 	{ 0x187c, 0x529, "13r3oled", 2500, /* 13 R3 OLED */
 	  LightsAlienware13r3oled, sizeof LightsAlienware13r3oled / sizeof *LightsAlienware13r3oled },
-	{ 0x187c, 0x530, "15r3", 2500, /* 15 R3 OLED */
-	  LightsAlienware15r3, sizeof LightsAlienware15r3 / sizeof *LightsAlienware15r3},
-	/* { 0x187c, 0x530, "17r4", 2500, #<{(| 17R4 2017 model |)}># */
-	/*   Lights17r4, sizeof Lights17r4 / sizeof *Lights17r4 }, */
+	/* { 0x187c, 0x530, "15r3", 2500, #<{(| 15 R3 OLED |)}># */
+	/*   LightsAlienware15r3, sizeof LightsAlienware15r3 / sizeof *LightsAlienware15r3}, */
+	{ 0x187c, 0x530, "17r4", 2500, /* 17R4 2017 model */
+	  Lights17r4, sizeof Lights17r4 / sizeof *Lights17r4 },
 };
 int AlienFxTypesCount = sizeof AlienFxTypes / sizeof AlienFxTypes[0];
 
