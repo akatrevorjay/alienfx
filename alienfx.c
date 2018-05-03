@@ -150,6 +150,28 @@ AlienFxLights_t LightsAurora[] = {
 unsigned int LightsAuroraCount = (sizeof LightsAurora
 								  / sizeof *LightsAurora);
 
+
+// 17r4 lighting.  Left/right from the alien head's persp,0 ective, facing you
+AlienFxLights_t Lights17r4[] = {
+	{ 0x0001, "keyboard-numpad"     ,0 },
+	{ 0x0002, "keyboard-right"	,0 },
+	{ 0x0004, "keyboard-middle"	,0 },
+	{ 0x0008, "keyboard-left"	,0 },
+	/* { 0x0010, "power-button-2"      ,0 }, */
+	/* { 0x0020, "speaker-right"       ,0 }, */
+	{ 0x0040, "logo"		,0 },
+	{ 0x0080, "head"                ,0 }, // alien's
+	/* { 0x0100, "name"                ,0 }, */
+	/* { 0x0200, "touchpad"            ,0 }, */
+	{ 0x1c00, "sides-left-both-and-right-lower"           ,0 }, // what
+	{ 0x2000, "side-right-upper"        ,0 },
+	{ 0x4000, "keyboard-macropad"   ,0 },
+	{ 0x7fff, "all"                 ,1 },
+};
+unsigned int Lights17r4Count = (sizeof Lights17r4
+								  / sizeof *Lights17r4);
+
+
 typedef struct _AlienFxType_t {
 	unsigned int idVendor;
 	unsigned int idProduct;
@@ -175,6 +197,8 @@ AlienFxType_t AlienFxTypes[] = {
 	  LightsM11x, sizeof LightsAurora / sizeof *LightsAurora },
 	{ 0x187c, 0x524, "m17x", 2500, /* nothing much verified yet */
 	  LightsAllPowerful, sizeof LightsAllPowerful / sizeof *LightsAllPowerful },
+	{ 0x187c, 0x530, "17r4", 2500, /* 17R4 2017 model (possibly 15R3 as well? untested.) */
+	  Lights17r4, sizeof Lights17r4 / sizeof *Lights17r4 },
 };
 int AlienFxTypesCount = sizeof AlienFxTypes / sizeof AlienFxTypes[0];
 
@@ -373,8 +397,8 @@ int ColorSet(libusb_device_handle *alienfx, int block, int region,
                              blue,
                              0 };
     return WriteDevice(alienfx, &data[0], sizeof data);
-}	
-	
+}
+
 int ColorSetAll(libusb_device_handle *alienfx, int block, int r, int g, int b)
 {
     return ColorSet(alienfx, block, 0xffffff, r, g, b);
@@ -430,7 +454,7 @@ int SetDelay(libusb_device_handle *alienfx, unsigned int delay)
     delay = (delay / STEP_SPEED) * STEP_SPEED; // quantize to step multiple
     unsigned char b1 = (delay >> 8) & 0xff;
     unsigned char b2 = (delay >> 0) & 0xff;
- 
+
     unsigned char data[] = { START_BYTE, COMMAND_SET_SPEED, b1, b2 };
     return WriteDevice(alienfx, &data[0], sizeof data);
 }
